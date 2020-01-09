@@ -1,0 +1,91 @@
+<div class="card detail">
+
+  <div class="card-block">
+    <div class="row no-gutters">
+      <div class="col-4">
+        <h5>{{documentDetail.attributes.productName}}</h5>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-4">
+        <h6>{{documentDetail.attributes.productDescription}}</h6>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-4">
+        <div class="table-responsive">
+          <table class="table table-condensed table-bordered">
+            <tbody>
+              <tr>
+                <td class="field-label bg-silver-lighter text-right" width="23%">Mg Moz</td>
+                <td class="field-value" width="10%">{{documentDetail.attributes.mgMoz}}</td>
+                <td class="field-label bg-silver-lighter text-right" width="23%">Mi Moz</td>
+                <td class="field-value" width="10%">{{documentDetail.attributes.miMoz}}</td>
+                <td class="field-label bg-silver-lighter text-right" width="24%">Mo Moz</td>
+                <td class="field-value" width="10%">{{documentDetail.attributes.moMoz}}</td>
+              </tr>
+              <tr>
+                <td class="field-label bg-silver-lighter text-right">Mg Rho</td>
+                <td class="field-value">{{documentDetail.attributes.mgRho}}</td>
+                <td class="field-label bg-silver-lighter text-right">Mi Rho</td>
+                <td class="field-value">{{documentDetail.attributes.miRho}}</td>
+                <td class="field-label bg-silver-lighter text-right">Mo Rho</td>
+                <td class="field-value">{{documentDetail.attributes.moRho}}</td>
+              </tr>
+              <tr>
+                <td class="field-label bg-silver-lighter text-right">Mg Nig</td>
+                <td class="field-value">{{documentDetail.attributes.mgNig}}</td>
+                <td class="field-label bg-silver-lighter text-right">Mi Nig</td>
+                <td class="field-value">{{documentDetail.attributes.miNig}}</td>
+                <td class="field-label bg-silver-lighter text-right">Mo Nig</td>
+                <td class="field-value">{{documentDetail.attributes.moNig}}</td>
+              </tr>
+              <tr>
+                <td class="field-label bg-silver-lighter text-right">Mg Met</td>
+                <td class="field-value">{{documentDetail.attributes.mgMet}}</td>
+                <td class="field-label bg-silver-lighter text-right">Mi Met</td>
+                <td class="field-value">{{documentDetail.attributes.miMet}}</td>
+                <td class="field-label bg-silver-lighter text-right">Mo Met</td>
+                <td class="field-value">{{documentDetail.attributes.moMet}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-1">
+      </div>
+      <div class="col-4">
+        <div class="table-responsive">
+          <table class="table table-condensed table-bordered">
+            <tbody>
+              <tr>
+                <td class="field-label bg-silver-lighter text-right" width="25%">Scorta minima Moz</td>
+                <td class="field-value" width="35%"><inline-editor type="number" [(ngModel)]="documentDetail.attributes.minStockMoz" (onSave)="save()" [disabled]="isSaving" placeholder="Scorta minima"></inline-editor></td>
+                <td class="" width="25%"></td>
+                <td class="" width="15%"></td>
+              </tr>
+              <tr>
+                <td class="field-label bg-silver-lighter text-right">Scorta minima Rho</td>
+                <td class="field-value"><inline-editor type="number" [(ngModel)]="documentDetail.attributes.minStockRho" (onSave)="save()" [disabled]="isSaving" placeholder="Scorta minima"></inline-editor></td>
+                <td class="field-label bg-silver-lighter text-center">Griglia Rho</td>
+                <td class="field-value"><input type="checkbox" [(ngModel)]="documentDetail.attributes.gridRho" (change)="save()" [disabled]="isSaving" class="form-control form-control-xs" /></td>
+              </tr>
+              <tr>
+                <td class="field-label bg-silver-lighter text-right">Scorta minima Nig</td>
+                <td class="field-value"><inline-editor type="number" [(ngModel)]="documentDetail.attributes.minStockNig" (onSave)="save()" [disabled]="isSaving" placeholder="Scorta minima"></inline-editor></td>
+                <td class="field-label bg-silver-lighter text-center">Griglia Nig</td>
+                <td class="field-value"><input type="checkbox" [(ngModel)]="documentDetail.attributes.gridNig" (change)="save()" [disabled]="isSaving" class="form-control form-control-xs" /></td>
+              </tr>
+              <tr>
+                <td class="field-label bg-silver-lighter text-right">Scorta minima Met</td>
+                <td class="field-value"><inline-editor type="number" [(ngModel)]="documentDetail.attributes.minStockMet" (onSave)="save()" [disabled]="isSaving" placeholder="Scorta minima"></inline-editor></td>
+                <td class="field-label bg-silver-lighter text-center">Griglia Met</td>
+                <td class="field-value"><input type="checkbox" [(ngModel)]="documentDetail.attributes.gridMet" (change)="save()" [disabled]="isSaving" class="form-control form-control-xs" /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

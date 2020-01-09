@@ -1,0 +1,142 @@
+<page-header title="Vendite Globale" subtitle="report delle vendite globale"></page-header>
+
+<content-panel title="Report Vendite Globale">
+
+  <web-sales-filters (onFilter)=filter($event)></web-sales-filters>
+
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="documents as items; else loading">
+
+        <div class="table-responsive m-b-10">
+          <table id="accordion" class="table m-b-0">
+            <thead>
+              <tr>
+                <th width="69"></th>
+                <th (click)="sort($event, 'sku')"><a class="sort-by none">Sku</a></th>
+                <th (click)="sort($event, 'brandName')"><a class="sort-by none">Marca</a></th>
+                <th (click)="sort($event, 'basePrice')"><a class="sort-by none">P Base</a></th>
+                <th (click)="sort($event, 'finalPrice')"><a class="sort-by none">P Publ</a></th>
+                <th (click)="sort($event, 'discount')"><a class="sort-by none">Sc %</a></th>
+                <th (click)="sort($event, 'mg')"><a class="sort-by none">Mg</a></th>
+                <th (click)="sort($event, 'mo')"><a class="sort-by none">Mo</a></th>
+                <th (click)="sort($event, 'mi')"><a class="sort-by none">Mi</a></th>
+                <th (click)="sort($event, 'stock')"><a class="sort-by none">Gia</a></th>
+                <th (click)="sort($event, 'webSold')"><a class="sort-by none">Vw</a></th>
+                <th (click)="sort($event, 'storeSold')"><a class="sort-by none">Vn</a></th>
+                <th (click)="sort($event, 'sold')"><a class="sort-by none">Vt</a></th>
+                <th (click)="sort($event, 'soldInOffer')"><a class="sort-by none">VOff</a></th>
+                <th (click)="sort($event, 'excess')"><a class="sort-by none">Ecc</a></th>
+                <th (click)="sort($event, 'storeExcess')"><a class="sort-by none">Eccn</a></th>
+                <th (click)="sort($event, 'picking')"><a class="sort-by none">PzPk</a></th>
+                <th (click)="sort($event, 'saleConsignment')"><a class="sort-by none">Cv</a></th>
+                <th (click)="sort($event, 'new')"><a class="sort-by none">Novità</a></th>
+                <th (click)="sort($event, 'grid')"><a class="sort-by none">Griglia</a></th>
+                <th (click)="sort($event, 'scarse')"><a class="sort-by none">Scarso</a></th>
+                <th (click)="sort($event, 'outOfProduction')"><a class="sort-by none">Fp</a></th>
+                <th (click)="sort($event, 'outlet')"><a class="sort-by none">Outlet</a></th>
+                <th (click)="sort($event, 'offer')"><a class="sort-by none">Off</a></th>
+                <th (click)="sort($event, 'measure')"><a class="sort-by none">Misura</a></th>
+                <th (click)="sort($event, 'lastLoadedDate')"><a class="sort-by none">Ult D Car</a></th>
+                <th (click)="sort($event, 'lastOrderDate')"><a class="sort-by none">Ult D Ord</a></th>
+                <th (click)="sort($event, 'dateCreated')"><a class="sort-by none">D Creaz</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-template ngFor let-item [ngForOf]="items.data" let-i="index" let-c="count">
+                <tr [id]="item.id" class="accordion-toggle collapsed" [attr.data-target]="'#row_detail_' + item.id"
+                    data-toggle="collapse" (onExpand)="_webSalesService.ExpandDocumentDetail(item, $event)">
+                  <td popover class="with-img field-name bg-silver-lighter">
+                    <img [src]="item.attributes.urlImage ? item.attributes.urlImage : '../assets/img/site/image-not-found.jpg'" [alt]="item.attributes.urlImage" class="height-30" />
+                    <img [src]="item.attributes.urlImage ? item.attributes.urlImage : '../assets/img/site/image-not-found.jpg'" [alt]="item.attributes.urlImage" class="d-none popover-content" />
+                  </td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.sku}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.brandName}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.basePrice | currency:'EUR'}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.finalPrice | currency:'EUR'}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.discount}} %</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.mg}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.mo}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.mi}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.stock}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.webSold}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.storeSold}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.sold}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.soldInOffer}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.excess}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.storeExcess}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.picking}}</td>
+                  <td class="field-name bg-silver-lighter checkbox"><input type="checkbox" [(ngModel)]="item.attributes.saleConsignment" (click)="toggleSaleConsignment($event, item)" [disabled]="isSaving" class="form-control form-control-xs" /></td>
+                  <td class="field-name bg-silver-lighter"><i class="far fa-check-square text-success" *ngIf="!!item.attributes.new"></i></td>
+                  <td class="field-name bg-silver-lighter"><i class="far fa-check-square text-success" *ngIf="!!item.attributes.grid"></i></td>
+                  <td class="field-name bg-silver-lighter"><i class="far fa-check-square text-danger" *ngIf="!!item.attributes.scarse"></i></td>
+                  <td class="field-name bg-silver-lighter"><i class="far fa-check-square text-danger" *ngIf="!!item.attributes.outOfProduction"></i></td>
+                  <td class="field-name bg-silver-lighter"><i class="far fa-check-square text-success" *ngIf="!!item.attributes.outlet"></i></td>
+                  <td class="field-name bg-silver-lighter"><i class="far fa-check-square text-success" *ngIf="!!item.attributes.offer"></i></td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.measure}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.lastLoadedDate | date}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.lastOrderDate | date}}</td>
+                  <td class="field-name bg-silver-lighter">{{item.attributes.dateCreated | date}}</td>
+                </tr>
+                <tr>
+                  <td colspan="999" class="collapsed-row">
+                    <div [id]="'row_detail_' + item.id" class="row-detail collapse p-5" data-parent="#accordion">
+                      <web-sales-detail [document]="item"></web-sales-detail>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row">
+
+          <div class="col-7">
+                <paginator [page]="items.meta ? items.meta.page : null"></paginator>
+          </div>
+
+          <div class="col-5">
+            <div class="table-responsive" *ngIf="items.data.length > 0 && items.meta && items.meta.totals">
+              <table class="table table-condensed table-bordered m-b-0">
+                <tbody>
+                  <tr>
+                    <td class="field-label bg-silver-lighter" width="100">Magazzino</td>
+                    <td class="field-value">Pz: <strong>{{items.meta.totals.qtyCount}}</strong></td>
+                    <td class="field-value">Valore: <strong>{{items.meta.totals.qtyValue | currency:'EUR'}}</strong></td>
+                    <td class="field-label bg-silver-lighter" width="100">Ordinato</td>
+                    <td class="field-value">Pz: <strong>{{items.meta.totals.ordersCount}}</strong></td>
+                    <td class="field-value">Valore: <strong>{{items.meta.totals.ordersValue | currency:'EUR'}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td class="field-label bg-silver-lighter" width="100">Venduto Neg</td>
+                    <td class="field-value">Pz: <strong>{{items.meta.totals.storeSoldCount}}</strong></td>
+                    <td class="field-value">Valore: <strong>{{items.meta.totals.storeSoldValue | currency:'EUR'}}</strong></td>
+                    <td class="field-label bg-silver-lighter" width="100">Venduto Web</td>
+                    <td class="field-value">Pz: <strong>{{items.meta.totals.webSoldCount}}</strong></td>
+                    <td class="field-value">Valore: <strong>{{items.meta.totals.webSoldValue | currency:'EUR'}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td class="field-label bg-silver-lighter" width="100">Cv</td>
+                    <td class="field-value">Pz: <strong>{{items.meta.totals.saleConsignmentCount}}</strong></td>
+                    <td class="field-value">Valore: <strong>{{items.meta.totals.saleConsignmentValue | currency:'EUR'}}</strong></td>
+                    <td class="field-label" width="100"></td>
+                    <td class="field-value"></td>
+                    <td class="field-value"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <ng-template #loading>
+        <div>Loading ...</div>
+      </ng-template>
+
+    </div>
+  </div>
+
+</content-panel>
+

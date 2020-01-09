@@ -1,0 +1,1 @@
+Este módulo contiene la funcionalidad de los reports de ventas del backoffice del cliente.

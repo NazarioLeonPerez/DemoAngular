@@ -1,0 +1,47 @@
+<div class="card detail">
+
+  <div class="card-block">
+    <div class="row no-gutters">
+      <div class="col-4">
+        <div class="table-responsive">
+          <table class="table table-condensed table-bordered">
+            <tbody>
+              <tr *ngIf="storeName !== 'Mozzate'">
+                <td class="field-label bg-silver-lighter">Mg Mozzate</td>
+                <td class="field-value">{{documentDetail.mgMozzate}}</td>
+                <td class="field-label bg-silver-lighter">Mi Mozzate</td>
+                <td class="field-value">{{documentDetail.miMozzate}}</td>
+                <td class="field-label bg-silver-lighter">Mo Mozzate</td>
+                <td class="field-value">{{documentDetail.moMozzate}}</td>
+              </tr>
+              <tr *ngIf="storeName !== 'Rho'">
+                <td class="field-label bg-silver-lighter">Mg Rho</td>
+                <td class="field-value">{{documentDetail.mgRho}}</td>
+                <td class="field-label bg-silver-lighter">Mi Rho</td>
+                <td class="field-value">{{documentDetail.miRho}}</td>
+                <td class="field-label bg-silver-lighter">Mo Rho</td>
+                <td class="field-value">{{documentDetail.moRho}}</td>
+              </tr>
+              <tr *ngIf="storeName !== 'Niguarda'">
+                <td class="field-label bg-silver-lighter">Mg Niguarda</td>
+                <td class="field-value">{{documentDetail.mgNiguarda}}</td>
+                <td class="field-label bg-silver-lighter">Mi Niguarda</td>
+                <td class="field-value">{{documentDetail.miNiguarda}}</td>
+                <td class="field-label bg-silver-lighter">Mo Niguarda</td>
+                <td class="field-value">{{documentDetail.moNiguarda}}</td>
+              </tr>
+              <tr *ngIf="storeName !== 'Metropoli'">
+                <td class="field-label bg-silver-lighter">Mg Metropoli</td>
+                <td class="field-value">{{documentDetail.mgMetropoli}}</td>
+                <td class="field-label bg-silver-lighter">Mi Metropoli</td>
+                <td class="field-value">{{documentDetail.miMetropoli}}</td>
+                <td class="field-label bg-silver-lighter">Mo Metropoli</td>
+                <td class="field-value">{{documentDetail.moMetropoli}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

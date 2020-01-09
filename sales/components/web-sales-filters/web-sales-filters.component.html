@@ -1,0 +1,590 @@
+
+<form (submit)="send()">
+  <div class="collapse" id="collapseFilters">
+
+    <!-- Filtro globale -->
+    <div class="row">
+
+      <div class="col-md-12">
+        <h5>Globale</h5>
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-md-2">
+        <label class="filter-label">Testo</label>
+        <input [(ngModel)]="filters.search" name="search" type="text" class="form-control form-control-sm" title="Cerca testo" autocomplete="off" />
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Sku</label>
+        <input [(ngModel)]="filters.sku" name="sku" type="text" class="form-control form-control-sm" title="Sku" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Gia. da</label>
+        <input [(ngModel)]="filters.stockFrom" name="stockFrom" type="number" step="1" class="form-control form-control-sm" title="Giacenza da" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Gia. a</label>
+        <input [(ngModel)]="filters.stockTo" name="stockTo" type="number" step="1" class="form-control form-control-sm" title="Giacenza a" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Vt. da</label>
+        <input [(ngModel)]="filters.soldFrom" name="soldFrom" type="number" step="1" class="form-control form-control-sm" title="Venduto totale da" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Vt. a</label>
+        <input [(ngModel)]="filters.soldTo" name="soldTo" type="number" step="1" class="form-control form-control-sm" title="Venduto totale a" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Prezzo da</label>
+        <input [(ngModel)]="filters.publicPriceFrom" name="publicPriceFrom" type="number" class="form-control form-control-sm" title="Prezzo da" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Prezzo a</label>
+        <input [(ngModel)]="filters.publicPriceTo" name="publicPriceTo" type="number" class="form-control form-control-sm" title="Prezzo a" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Vt/Mg(%) da</label>
+        <input [(ngModel)]="filters.ratioSoldMgFrom" name="ratioSoldMgFrom" type="number" class="form-control form-control-sm" title="Rapporto percentuale venduto/giacenza da" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Multi sku</label>
+        <multi-sku-picker separator="','" #multiSku></multi-sku-picker>
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-md-2">
+        <label class="filter-label">Data vendita da</label>
+        <input [(ngModel)]="filters.startDate" name="startDate" type="date" class="form-control form-control-sm" title="Data vendita da" />
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Data vendita a</label>
+        <input [(ngModel)]="filters.endDate" name="endDate" type="date" class="form-control form-control-sm" title="Data vendita a" />
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Data creazione da</label>
+        <input [(ngModel)]="filters.dateCreatedFrom" name="dateCreatedFrom" type="date" class="form-control form-control-sm" title="Data creazione da" />
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Data creazione a</label>
+        <input [(ngModel)]="filters.dateCreatedTo" name="dateCreatedTo" type="date" class="form-control form-control-sm" title="Data creazione a" />
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Data carico da</label>
+        <input [(ngModel)]="filters.loadedDateFrom" name="loadedDateFrom" type="date" class="form-control form-control-sm" title="Data carico da" />
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Data carico a</label>
+        <input [(ngModel)]="filters.loadedDateTo" name="loadedDateTo" type="date" class="form-control form-control-sm" title="Data carico a" />
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-md-2">
+        <label class="filter-label">Categoria</label>
+        <category-select [(ngModel)]="filters.categoryIds" name="categoryIds" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"></category-select>
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Marca</label>
+        <brand-select [(ngModel)]="filters.brandIds" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true" name="brandIds"></brand-select>
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Collezione (per brand)</label>
+        <collection-select [(ngModel)]="filters.collectionIds" [brandIds]="filters.brandIds" name="collectionIds" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"></collection-select>
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Genere</label>
+        <gender-select [(ngModel)]="filters.genderIds" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true" name="genderIds"></gender-select>
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">In C.V da</label>
+        <input [(ngModel)]="filters.saleConsignmentFrom" name="saleConsignmentFrom" type="date" class="form-control form-control-sm" title="In C.V da" />
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Fornitore</label>
+        <supplier-select [(ngModel)]="filters.supplierIds" name="supplierIds" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"></supplier-select>
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-md-2">
+        <label class="filter-label">Magazzini</label>
+        <store-select [(ngModel)]="filters.storeIds" name="storeIds" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"></store-select>
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Origine</label>
+        <origin-select [(ngModel)]="filters.originIds" name="originIds" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"></origin-select>
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Scarso da</label>
+        <input [(ngModel)]="filters.dateScarseFrom" name="dateScarseFrom" type="date" class="form-control form-control-sm" title="Scarso da" />
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Scarso a</label>
+        <input [(ngModel)]="filters.dateScarseTo" name="dateScarseTo" type="date" class="form-control form-control-sm" title="Scarso a" />
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Offerta da</label>
+        <input [(ngModel)]="filters.dateOfferFrom" name="dateOfferFrom" type="date" class="form-control form-control-sm" title="Offerta da" />
+      </div>
+
+      <div class="col-md-2">
+        <label class="filter-label">Offerta a</label>
+        <input [(ngModel)]="filters.dateOfferTo" name="dateOfferTo" type="date" class="form-control form-control-sm" title="Offerta a" />
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-md-1">
+        <label class="filter-label">Attivo</label><br />
+        <three-way [(ngModel)]="filters.active" name="active"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Fuori prod.</label><br />
+        <three-way [(ngModel)]="filters.outOfProduction" name="outOfProduction"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Scarso</label><br />
+        <three-way [(ngModel)]="filters.scarse" name="scarse"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Novità</label><br />
+        <three-way [(ngModel)]="filters.New" name="New"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Griglia</label><br />
+        <three-way [(ngModel)]="filters.grid" name="grid"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg</label><br />
+        <three-way [(ngModel)]="filters.mg" name="mg"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mi</label><br />
+        <three-way [(ngModel)]="filters.mi" name="mi"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mo</label><br />
+        <three-way [(ngModel)]="filters.mo" name="mo"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Venduto</label><br />
+        <three-way [(ngModel)]="filters.sold" name="sold"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Outlet</label><br />
+        <three-way [(ngModel)]="filters.outlet" name="outlet"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">C.V</label><br />
+        <three-way [(ngModel)]="filters.saleConsignment" name="saleConsignment"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Offerta</label><br />
+        <three-way [(ngModel)]="filters.offer" name="offer"></three-way>
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-md-1">
+        <label class="filter-label">Img360</label><br />
+        <three-way [(ngModel)]="filters.img360" name="img360"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Foto Ind.</label><br />
+        <three-way [(ngModel)]="filters.wearingPhoto" name="wearingPhoto"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Gia +/- Vt</label><br />
+        <three-way [(ngModel)]="filters.stockSoldCompare" name="stockSoldCompare"></three-way>
+      </div>
+
+      <!--<div class="col-md-1">
+        <label class="filter-label">Mg.Moz.</label><br />
+        <three-way [(ngModel)]="filters.mgMoz" name="mgMoz"></three-way>
+      </div>-->
+      <!--<div class="col-md-2">
+        <label class="filter-label">Ult.Data Fornitore a</label>
+        <input [(ngModel)]="filters.lastDateSupplierTo" name="lastDateSupplierTo" type="date" class="form-control form-control-sm" title="Offerta a" />
+      </div>-->
+    </div>
+
+    <!-- Filtri magazzino Mozzate -->
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <hr class="mt-0 mb-2">
+        <h5>Mozzate</h5>
+      </div>
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg da</label>
+        <input [(ngModel)]="filters.mgMozFrom" name="mgMozFrom" type="number" step="1" class="form-control form-control-sm" title="Giacenza magazzino da" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg a</label>
+        <input [(ngModel)]="filters.mgMozTo" name="mgMozTo" type="number" step="1" class="form-control form-control-sm" title="Giacenza magazzino a" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg</label><br />
+        <three-way [(ngModel)]="filters.mgMoz" name="mgMoz"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mi</label><br />
+        <three-way [(ngModel)]="filters.miMoz" name="miMoz"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mo</label><br />
+        <three-way [(ngModel)]="filters.moMoz" name="moMoz"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg +/- Vn</label><br />
+        <three-way [(ngModel)]="filters.mgSoldCompareMoz" name="mgSoldCompareMoz"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Venduto</label><br />
+        <three-way [(ngModel)]="filters.soldMoz" name="soldMoz"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Sm</label><br />
+        <three-way [(ngModel)]="filters.minStockMoz" name="minStockMoz"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg +/- Sm</label><br />
+        <three-way [(ngModel)]="filters.mgMinimumStockCompareMoz" name="mgMinimumStockCompareMoz"></three-way>
+      </div>
+
+      <!--<div class="col-md-1">
+        <label class="filter-label">Griglia</label><br />
+        <three-way [(ngModel)]="filters.gridMoz" name="gridMoz"></three-way>
+      </div>-->
+
+    </div>
+
+    <!-- Filtri magazzino Rho -->
+    <div class="row mt-3">
+
+      <div class="col-md-12">
+        <hr class="mt-0 mb-2">
+        <h5>Rho</h5>
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg da</label>
+        <input [(ngModel)]="filters.mgRhoFrom" name="mgRhoFrom" type="number" step="1" class="form-control form-control-sm" title="Giacenza magazzino da" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg a</label>
+        <input [(ngModel)]="filters.mgRhoTo" name="mgRhoTo" type="number" step="1" class="form-control form-control-sm" title="Giacenza magazzino a" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg</label><br />
+        <three-way [(ngModel)]="filters.mgRho" name="mgRho"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mi</label><br />
+        <three-way [(ngModel)]="filters.miRho" name="miRho"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mo</label><br />
+        <three-way [(ngModel)]="filters.moRho" name="moRho"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg +/- Vn</label><br />
+        <three-way [(ngModel)]="filters.mgSoldCompareRho" name="mgSoldCompareRho"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Venduto</label><br />
+        <three-way [(ngModel)]="filters.soldRho" name="soldRho"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Sm</label><br />
+        <three-way [(ngModel)]="filters.minStockRho" name="minStockRho"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg +/- Sm</label><br />
+        <three-way [(ngModel)]="filters.mgMinimumStockCompareRho" name="mgMinimumStockCompareRho"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Griglia</label><br />
+        <three-way [(ngModel)]="filters.gridRho" name="gridRho"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">PzPk</label><br />
+        <three-way [(ngModel)]="filters.pickingRho" name="pickingRho"></three-way>
+      </div>
+
+    </div>
+
+    <!-- Filtri magazzino Niguarda -->
+    <div class="row mt-3">
+
+      <div class="col-md-12">
+        <hr class="mt-0 mb-2">
+        <h5>Niguarda</h5>
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg da</label>
+        <input [(ngModel)]="filters.mgNigFrom" name="mgNigFrom" type="number" step="1" class="form-control form-control-sm" title="Giacenza magazzino da" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg a</label>
+        <input [(ngModel)]="filters.mgNigTo" name="mgNigTo" type="number" step="1" class="form-control form-control-sm" title="Giacenza magazzino a" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg</label><br />
+        <three-way [(ngModel)]="filters.mgNig" name="mgNig"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mi</label><br />
+        <three-way [(ngModel)]="filters.miNig" name="miNig"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mo</label><br />
+        <three-way [(ngModel)]="filters.moNig" name="moNig"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg +/- Vn</label><br />
+        <three-way [(ngModel)]="filters.mgSoldCompareNig" name="mgSoldCompareNig"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Venduto</label><br />
+        <three-way [(ngModel)]="filters.soldNig" name="soldNig"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Sm</label><br />
+        <three-way [(ngModel)]="filters.minStockNig" name="minStockNig"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg +/- Sm</label><br />
+        <three-way [(ngModel)]="filters.mgMinimumStockCompareNig" name="mgMinimumStockCompareNig"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Griglia</label><br />
+        <three-way [(ngModel)]="filters.gridNig" name="gridNig"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">PzPk</label><br />
+        <three-way [(ngModel)]="filters.pickingNig" name="pickingNig"></three-way>
+      </div>
+
+    </div>
+
+    <!-- Filtri magazzino Metropoli -->
+    <div class="row mt-3">
+
+      <div class="col-md-12">
+        <hr class="mt-0 mb-2">
+        <h5>Metropoli</h5>
+      </div>
+
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-1">
+        <label class="filter-label">Mg da</label>
+        <input [(ngModel)]="filters.mgMetFrom" name="mgMetFrom" type="number" step="1" class="form-control form-control-sm" title="Giacenza magazzino da" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg a</label>
+        <input [(ngModel)]="filters.mgMetTo" name="mgMetTo" type="number" step="1" class="form-control form-control-sm" title="Giacenza magazzino a" autocomplete="off" />
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg</label><br />
+        <three-way [(ngModel)]="filters.mgMet" name="mgMet"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mi</label><br />
+        <three-way [(ngModel)]="filters.miMet" name="miMet"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mo</label><br />
+        <three-way [(ngModel)]="filters.moMet" name="moMet"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg +/- Vn</label><br />
+        <three-way [(ngModel)]="filters.mgSoldCompareMet" name="mgSoldCompareMet"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Venduto</label><br />
+        <three-way [(ngModel)]="filters.soldMet" name="soldMet"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Sm</label><br />
+        <three-way [(ngModel)]="filters.minStockMet" name="minStockMet"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Mg +/- Sm</label><br />
+        <three-way [(ngModel)]="filters.mgMinimumStockCompareMet" name="mgMinimumStockCompareMet"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">Griglia</label><br />
+        <three-way [(ngModel)]="filters.gridMet" name="gridMet"></three-way>
+      </div>
+
+      <div class="col-md-1">
+        <label class="filter-label">PzPk</label><br />
+        <three-way [(ngModel)]="filters.pickingMet" name="pickingMet"></three-way>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row form-group">
+
+    <div class="col-md-1">
+      <br />
+      <a (click)="filterExpanded = !filterExpanded" class="btn btn-md btn-icon btn-secondary text-white float-left" data-toggle="collapse" href="#collapseFilters" role="button" aria-expanded="false" aria-controls="collapseFilters">
+        <i class="fas" [ngClass]="filterExpanded ? 'fa-angle-double-up' : 'fa-angle-double-down'"></i>
+      </a>
+    </div>
+
+    <div class="col-md-1" *auth="['AuthExportToExcelFromWeb']">
+      <label class="filter-label">Vg</label><br />
+      <a (click)="exportTotalSalesToExcel()" class="btn btn-md btn-icon btn-success text-white float-left" title="Esporta vendite globale">
+        <i class="fas fa-file-excel" *ngIf="!exportingToExcel; else exporting_to_excel"></i>
+        <ng-template #exporting_to_excel>
+          <i class="fas fa-hourglass-half"></i>
+        </ng-template>
+      </a>
+    </div>
+
+    <div class="col-md-1" *auth="['AuthExportToExcelFromWeb']">
+      <label class="filter-label">Orn</label><br />
+      <a (click)="exportStoreOrderToExcel()" class="btn btn-md btn-icon btn-success text-white float-left" title="Esporta ordine negozio">
+        <i class="fas fa-file-excel" *ngIf="!exportingToExcel; else exporting_to_excel"></i>
+        <ng-template #exporting_to_excel>
+          <i class="fas fa-hourglass-half"></i>
+        </ng-template>
+      </a>
+    </div>
+
+    <div class="col-md-1" *auth="['AuthExportToExcelFromWeb']">
+      <label class="filter-label">Vr</label><br />
+      <a (click)="exportReportViewToExcel()" class="btn btn-md btn-icon btn-success text-white float-left" title="Esporta vista report">
+        <i class="fas fa-file-excel" *ngIf="!exportingToExcel; else exporting_to_excel"></i>
+        <ng-template #exporting_to_excel>
+          <i class="fas fa-hourglass-half"></i>
+        </ng-template>
+      </a>
+    </div>
+
+    <div class="col-md-2">
+      <br /><product-modifier [filters]="clearedFilters" [skuList]="skuList"></product-modifier>
+    </div>
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-1">
+      <br /><button (click)="clear()" type="button" class="btn btn-sm btn-secondary float-right" data-dismiss="modal">Pulisci</button>
+    </div>
+
+    <div class="col-md-1">
+      <br /><button type="submit" class="btn btn-sm btn-primary float-right">Applica</button>
+    </div>
+
+  </div>
+
+</form>
